@@ -1,0 +1,10 @@
+/home/zabavnikovda/.jdks/axiomjdk-26/bin/java --enable-preview -javaagent:/opt/openIDE/lib/idea_rt.jar=33233 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /home/zabavnikovda/OpenideProjects/JavaPro/out/production/JavaPro dz1.MainRunner
+<--- Start tests --->
+Exception in test class: Priority must be from 0 to 10 in method testSum of class dz1.CalculatorTest
+dz1.TestExceptions$BadTestClassError: Priority must be from 0 to 10 in method testSum of class dz1.CalculatorTest
+	at dz1.TestRunner.buildTestData(TestLauncher.java:104)
+	at dz1.TestRunner.gatherMethods(TestLauncher.java:63)
+	at dz1.TestRunner.launch(TestLauncher.java:16)
+	at dz1.MainRunner.main(MainRunner.java:9)
+
+Process finished with exit code 0
