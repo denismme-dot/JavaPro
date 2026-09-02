@@ -1,0 +1,75 @@
+/home/zabavnikovda/.jdks/axiomjdk-26/bin/java --enable-preview -javaagent:/opt/openIDE/lib/idea_rt.jar=34587 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /home/zabavnikovda/OpenideProjects/JavaPro/out/production/JavaPro dz1.MainRunner
+<--- Start tests --->
+Begin of calc tests
+  ->
+    Check ADD
+    15 + 13 = 18
+  <-
+  ->
+    This is test with error
+  <-
+  ->
+    This is test with error 1
+  <-
+  ->
+    Check SUB
+    110 - 24 = 86
+  <-
+  ->
+    Test with exception 2
+  <-
+  ->
+    Test with exception 1
+  <-
+  ->
+    Check MUL
+    13 * 13 = 169
+  <-
+  ->
+    Check DIV
+    18 / 9 = 2
+  <-
+  ->
+    Check XOR
+    10 / 11 = 1
+  <-
+End of calc tests
+
+<--- MainRunner Results --->
+
+ Good tests:
+  - 1) Check ADD (priority: 10)
+  - 2) Check SUB (priority: 8)
+  - 3) Check MUL (priority: 5)
+  - 4) Check DIV (priority: 5)
+  - 5) Check XOR (priority: 4)
+
+ Test failed (AssertionFailedError):
+  - Test with error 2 (priority: 10)
+    Error message: Expected 1, get 2
+  - Test with error 1 (priority: 9)
+    Error message: Expected 2, get 1
+
+️ Error tests:
+  - Test with exception 2 (priority: 7)
+    Error message: WOW! EXCEPTION 2
+  - Test with exception 1 (priority: 6)
+    Error message: WOW! EXCEPTION 1
+
+️ Skipped tests:
+  - Ignored test 2 (priority: 8, ignored: true)
+    Reason: Test checked as Ignore
+  - Ignored test 1 (priority: 7, ignored: true)
+    Reason: Test checked as Ignore
+
+<--- Stats --->
+Total test count: 11
+ Good: 5
+ Failed: 2
+ Errors: 2
+️ Skipped: 2
+
+<--- Exec order --->
+Test sorted by: Priority (from 10 to 0), Order (from 1 to 10), Name (by alphabet)
+
+Process finished with exit code 0
