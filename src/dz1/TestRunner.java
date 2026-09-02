@@ -11,14 +11,13 @@ public class TestRunner {
     public static Map<TestResult, List<TestDetails>> runTests(Class<?> c) {
         Map<TestResult, List<TestDetails>> results = initResults();
 
-        checkIfCanCreateInstance(c);
+        Object testInstance = checkIfCanCreateInstance(c);
         Method[] allMethods = c.getDeclaredMethods();
         TestMethodsHolder holder = gatherMethods(allMethods, c);
         if (holder.tests.isEmpty()) {
             return results;
         }
         sortTests(holder.tests);
-        Object testInstance = createInstance(c);
         if (!runBeforeAll(holder.beforeAll, results, holder.tests)) {
             return results;
         }
@@ -35,9 +34,9 @@ public class TestRunner {
         return results;
     }
 
-    private static void checkIfCanCreateInstance(Class<?> testClass) {
+    private static Object checkIfCanCreateInstance(Class<?> testClass) {
         try {
-            testClass.getDeclaredConstructor().newInstance();
+            return testClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new TestExceptions.BadTestClassError(
                     "Can't create object of class " + testClass.getName(), e);
