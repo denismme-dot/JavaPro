@@ -1,0 +1,57 @@
+/home/zabavnikovda/.jdks/axiomjdk-26/bin/java --enable-preview -javaagent:/opt/openIDE/lib/idea_rt.jar=42469 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /home/zabavnikovda/OpenideProjects/JavaPro/out/production/JavaPro dz2.main
+
+=== Case 1 ===
+Third largest number: 10 for list [5, 2, 10, 9, 4, 3, 10, 1, 13]
+
+=== Case 2 ===
+Third largest unique number: 9 for list [5, 2, 10, 9, 4, 3, 10, 1, 13]
+
+=== Employee list is ===
+Employee{name='Alice', age=45, position='Engineer'}
+Employee{name='Bob', age=38, position='Manager'}
+Employee{name='Charlie', age=52, position='Engineer'}
+Employee{name='Diana', age=29, position='Designer'}
+Employee{name='Eve', age=41, position='Engineer'}
+Employee{name='Frank', age=31, position='Engineer'}
+Employee{name='Grace', age=47, position='Engineer'}
+Employee{name='Henry', age=55, position='Director'}
+Employee{name='Ivy', age=36, position='Engineer'}
+Employee{name='Jack', age=50, position='Engineer'}
+
+=== Case 3 - Top 3 oldest engineers names ===
+- Charlie
+- Jack
+- Grace
+
+=== Case 4 - Average age of engineers: 43,14 ===
+=== Case 5 - Longest string ===
+Strings: cat, elephant, dog, hippopotamus, bird, crocodile, ant, butterfly, fox, rhinoceros
+Longest string: hippopotamus (length: 12)
+
+=== Case 6 - Hashmap ===
+Input string is: 'the quick brown fox jumps over the lazy dog the fox runs fast and the dog sleeps'
+Word counts:
+- over: 1
+- the: 4
+- sleeps: 1
+- quick: 1
+- fast: 1
+- and: 1
+- lazy: 1
+- jumps: 1
+- brown: 1
+- runs: 1
+- dog: 2
+- fox: 2
+
+=== Case 7 - List of words by length ===
+Sorted:   fig, date, kiwi, apple, grape, lemon, banana, cherry, honeydew, elderberry
+
+=== Case 8 - Largest word from sentences ===
+wordSet is: 
+the quick brown fox jumps, fat cat sat at met, and eat a fat rat, birds fly high in sky, fish swim in the sea, sun shines bright today, yellow moon glows at night
+Longest word: shines (length: 6)
+
+---------- Happy end! -------------
+
+Process finished with exit code 0
