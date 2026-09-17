@@ -1,0 +1,24 @@
+/home/zabavnikovda/.jdks/axiomjdk-26/bin/java --enable-preview -javaagent:/opt/openIDE/lib/idea_rt.jar=45665 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /home/zabavnikovda/OpenideProjects/JavaPro/out/production/JavaPro dz3.dz3
+Task 3 started by dz3-worker-1
+Task 2 started by dz3-worker-0
+Task 1 started by dz3-worker-2
+Task 3 finished by dz3-worker-1
+Task 4 started by dz3-worker-1
+Task 2 finished by dz3-worker-0
+Task 5 started by dz3-worker-0
+Task 1 finished by dz3-worker-2
+Task 6 started by dz3-worker-2
+Task 4 finished by dz3-worker-1
+Task 5 finished by dz3-worker-0
+Task 8 started by dz3-worker-0
+Task 7 started by dz3-worker-1
+Task 6 finished by dz3-worker-2
+Task 9 started by dz3-worker-2
+Task 8 finished by dz3-worker-0
+Task 10 started by dz3-worker-0
+Task 7 finished by dz3-worker-1
+Task 9 finished by dz3-worker-2
+Task 10 finished by dz3-worker-0
+All tasks completed, pool terminated.
+
+Process finished with exit code 0
