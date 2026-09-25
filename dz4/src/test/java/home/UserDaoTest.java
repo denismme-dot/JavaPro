@@ -1,3 +1,5 @@
+package home;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserDaoTest {
 
     private AnnotationConfigApplicationContext ctx;
-    private UserDAO userDao;
+    private UserDao userDao;
 
     @BeforeEach
     void setUp() {
         ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        userDao = ctx.getBean(UserDAO.class);
+        userDao = ctx.getBean(UserDao.class);
         userDao.findAll().forEach(u -> userDao.deleteById(u.getId()));
     }
 

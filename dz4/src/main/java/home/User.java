@@ -1,10 +1,9 @@
+package home;
+
 public class User {
 
     private Long id;
     private String username;
-
-    public User() {
-    }
 
     public User(Long id, String username) {
         this.id = id;

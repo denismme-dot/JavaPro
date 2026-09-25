@@ -1,13 +1,16 @@
+package home;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserService {
 
-    private final UserDAO userDao;
+    private final UserDao userDao;
 
-    public UserService(UserDAO userDao) {
+    public UserService(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -22,35 +25,17 @@ public class UserService {
     }
 
     public Optional<User> getById(Long id) {
-        if (id == null) {
-            return Optional.empty();
-        }
+        if (id == null) return Optional.empty();
         return userDao.findById(id);
     }
 
     public Optional<User> getByUsername(String username) {
-        if (username == null || username.isBlank()) {
-            return Optional.empty();
-        }
+        if (username == null || username.isBlank()) return Optional.empty();
         return userDao.findByUsername(username);
     }
 
     public List<User> getAll() {
         return userDao.findAll();
-    }
-
-    public boolean deleteById(Long id) {
-        if (id == null) {
-            return false;
-        }
-        return userDao.deleteById(id);
-    }
-
-    public boolean delete(User user) {
-        if (user == null || user.getId() == null) {
-            return false;
-        }
-        return userDao.deleteById(user.getId());
     }
 
     public boolean update(User user) {
@@ -59,5 +44,14 @@ public class UserService {
         }
         return userDao.update(user);
     }
-}
 
+    public boolean delete(User user) {
+        if (user == null || user.getId() == null) return false;
+        return userDao.deleteById(user.getId());
+    }
+
+    public boolean deleteById(Long id) {
+        if (id == null) return false;
+        return userDao.deleteById(id);
+    }
+}
