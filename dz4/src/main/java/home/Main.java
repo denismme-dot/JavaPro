@@ -1,14 +1,19 @@
 package home;
 
+import home.dto.User;
+import home.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+
 import java.util.List;
 
+@ComponentScan
 public class Main {
 
         public static void main(String[] args) {
 
                 try (AnnotationConfigApplicationContext ctx =
-                        new AnnotationConfigApplicationContext(AppConfig.class)) {
+                        new AnnotationConfigApplicationContext(Main.class)) {
 
                         UserService userService = ctx.getBean(UserService.class);
                         userService.getAll().forEach(userService::delete);

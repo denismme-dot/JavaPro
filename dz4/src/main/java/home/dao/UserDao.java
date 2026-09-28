@@ -1,17 +1,18 @@
-package home;
+package home.dao;
 
+import home.dto.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Component
 public class UserDao {
 
     private final JdbcTemplate jdbcTemplate;

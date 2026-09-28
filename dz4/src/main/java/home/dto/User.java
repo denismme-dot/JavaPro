@@ -1,4 +1,4 @@
-package home;
+package home.dto;
 
 public class User {
 

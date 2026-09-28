@@ -1,11 +1,13 @@
-package home;
+package home.service;
 
-import org.springframework.stereotype.Service;
+import home.dao.UserDao;
+import home.dto.User;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 public class UserService {
 
     private final UserDao userDao;

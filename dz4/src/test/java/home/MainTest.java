@@ -1,5 +1,6 @@
 package home;
 
+import home.config.AppConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
