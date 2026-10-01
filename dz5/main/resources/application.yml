@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: dz5
+
+  datasource:
+    url: jdbc:postgresql://172.28.128.173:5432/u2
+    username: java
+    password: java
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: dz5-hikari-pool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    #show-sql: true
+    properties:
+      hibernate:
+        default_schema: java
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    schemas: java
+    default-schema: java
