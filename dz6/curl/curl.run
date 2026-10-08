@@ -1,0 +1,31 @@
+# Пользователи
+echo "http://localhost:8080/api/v1/users">curl.result
+curl --no-progress-meter "http://localhost:8080/api/v1/users" | jq >>curl.result
+echo "http://localhost:8080/api/v1/users/1" >>curl.result
+curl --no-progress-meter "http://localhost:8080/api/v1/users/1" | jq >>curl.result
+echo "http://localhost:8080/api/v1/users/by-username/tanya">>curl.result
+curl --no-progress-meter "http://localhost:8080/api/v1/users/by-username/tanya" | jq >>curl.result
+
+# Создать пользователя
+echo "POST new_user">>curl.result
+curl --no-progress-meter -X POST "http://localhost:8080/api/v1/users" \
+  -H "Content-Type: application/json" \
+  -d '{"username":"new_user"}' | jq >>curl.result
+
+# Обновить пользователя
+echo "PUT user 1">>curl.result
+curl --no-progress-meter -X PUT "http://localhost:8080/api/v1/users/1" \
+  -H "Content-Type: application/json" \
+  -d '{"username":"tanya_updated"}' | jq >>curl.result
+
+# Удалить пользователя
+echo "DELETE user 2">>curl.result
+curl --no-progress-meter -X DELETE "http://localhost:8080/api/v1/users/2" -i >>curl.result
+
+# Продукты
+echo "http://localhost:8080/api/v1/products?userId=1">>curl.result
+curl --no-progress-meter "http://localhost:8080/api/v1/products?userId=1" | jq >>curl.result
+echo "http://localhost:8080/api/v1/products/1">>curl.result
+curl --no-progress-meter "http://localhost:8080/api/v1/products/1" | jq >>curl.result
+echo "http://localhost:8080/api/v1/products/filter?userId=1&type=CARD">>curl.result
+curl --no-progress-meter "http://localhost:8080/api/v1/products/filter?userId=1&type=CARD" | jq >>curl.result
