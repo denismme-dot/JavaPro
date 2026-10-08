@@ -59,21 +59,23 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody UserDto dto) {
-        User existing = userService.getById(id).orElse(null);
-        if (existing == null) {
-            return ResponseEntity.notFound().build();
-        }
-        existing.setUsername(dto.username());
-        User updated = userService.update(existing);
-        return ResponseEntity.ok(userMapper.toDto(updated));
+        return userService.getById(id)
+                .map(existing -> {
+                    existing.setUsername(dto.username());
+                    return userService.update(existing);
+                })
+                .map(userMapper::toDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (userService.getById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        userService.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return userService.getById(id)
+                .map(user -> {
+                    userService.deleteById(user.getId());
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }
