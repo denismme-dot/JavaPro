@@ -1,0 +1,74 @@
+http://localhost:8080/api/v1/users
+[
+  {
+    "id": 1,
+    "username": "tanya"
+  },
+  {
+    "id": 2,
+    "username": "den"
+  },
+  {
+    "id": 3,
+    "username": "alex"
+  }
+]
+http://localhost:8080/api/v1/users/1
+{
+  "id": 1,
+  "username": "tanya"
+}
+http://localhost:8080/api/v1/users/by-username/tanya
+{
+  "id": 1,
+  "username": "tanya"
+}
+POST new_user
+{
+  "id": 4,
+  "username": "new_user"
+}
+PUT user 1
+{
+  "id": 1,
+  "username": "tanya_updated"
+}
+DELETE user 2
+HTTP/1.1 204 
+Date: Thu, 08 Oct 2026 10:03:32 GMT
+
+http://localhost:8080/api/v1/products?userId=1
+[
+  {
+    "id": 1,
+    "accountNumber": "ACC-TANYA-1",
+    "balance": 1500.00,
+    "productType": "ACCOUNT",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "accountNumber": "CRD-TANYA-1",
+    "balance": 250.75,
+    "productType": "CARD",
+    "userId": 1
+  }
+]
+http://localhost:8080/api/v1/products/1
+{
+  "id": 1,
+  "accountNumber": "ACC-TANYA-1",
+  "balance": 1500.00,
+  "productType": "ACCOUNT",
+  "userId": 1
+}
+http://localhost:8080/api/v1/products/filter?userId=1&type=CARD
+[
+  {
+    "id": 2,
+    "accountNumber": "CRD-TANYA-1",
+    "balance": 250.75,
+    "productType": "CARD",
+    "userId": 1
+  }
+]

@@ -1,0 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS "java";
+
+CREATE TABLE IF NOT EXISTS "java"."users" (
+    id       BIGSERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE
+);
