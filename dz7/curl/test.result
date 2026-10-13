@@ -1,0 +1,140 @@
+==========================================
+  TEST RUN: 2026-10-13 16:52:38
+==========================================
+
+############### product-service ###############
+Base URL: http://localhost:8081
+
+>>> curl -s http://localhost:8081/api/v1/users
+[
+  {
+    "id": 1,
+    "username": "tanya"
+  },
+  {
+    "id": 2,
+    "username": "den"
+  },
+  {
+    "id": 3,
+    "username": "alex"
+  }
+]
+
+>>> curl -s http://localhost:8081/api/v1/users/1
+{
+  "id": 1,
+  "username": "tanya"
+}
+
+>>> curl -s http://localhost:8081/api/v1/users/by-username/tanya
+{
+  "id": 1,
+  "username": "tanya"
+}
+
+>>> curl -s 'http://localhost:8081/api/v1/products?userId=1'
+[
+  {
+    "id": 1,
+    "accountNumber": "ACC-TANYA-1",
+    "balance": 1500.00,
+    "productType": "ACCOUNT",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "accountNumber": "CRD-TANYA-1",
+    "balance": 250.75,
+    "productType": "CARD",
+    "userId": 1
+  }
+]
+
+>>> curl -s http://localhost:8081/api/v1/products/1
+{
+  "id": 1,
+  "accountNumber": "ACC-TANYA-1",
+  "balance": 1500.00,
+  "productType": "ACCOUNT",
+  "userId": 1
+}
+
+--- withdraw 100 from product 1 ---
+
+>>> curl -s -X POST http://localhost:8081/api/v1/products/1/withdraw -H 'Content-Type: application/json' -d '{"amount":100.00}'
+{
+  "id": 1,
+  "accountNumber": "ACC-TANYA-1",
+  "balance": 1400.00,
+  "productType": "ACCOUNT",
+  "userId": 1
+}
+
+--- deposit 50 to product 1 ---
+
+>>> curl -s -X POST http://localhost:8081/api/v1/products/1/deposit -H 'Content-Type: application/json' -d '{"amount":50.00}'
+{
+  "id": 1,
+  "accountNumber": "ACC-TANYA-1",
+  "balance": 1450.00,
+  "productType": "ACCOUNT",
+  "userId": 1
+}
+
+############### payment-service ###############
+Base URL: http://localhost:8082
+
+>>> curl -s http://localhost:8082/api/v1/payments/clients/1/products
+[
+  {
+    "id": 2,
+    "accountNumber": "CRD-TANYA-1",
+    "balance": 250.75,
+    "productType": "CARD",
+    "userId": 1
+  },
+  {
+    "id": 1,
+    "accountNumber": "ACC-TANYA-1",
+    "balance": 1450.00,
+    "productType": "ACCOUNT",
+    "userId": 1
+  }
+]
+
+--- successful payment ---
+
+>>> curl -s -X POST http://localhost:8082/api/v1/payments/execute -H 'Content-Type: application/json' -d '{"productId":1,"amount":100.00}'
+{
+  "productId": 1,
+  "accountNumber": "ACC-TANYA-1",
+  "amount": 100.00,
+  "balanceAfter": 1350.00,
+  "status": "SUCCESS"
+}
+
+--- payment: insufficient funds ---
+
+>>> curl -s -X POST http://localhost:8082/api/v1/payments/execute -H 'Content-Type: application/json' -d '{"productId":1,"amount":999999.00}'
+{
+  "error": "Insufficient Funds",
+  "status": 409,
+  "timestamp": "2026-10-13T16:52:38.965998747",
+  "message": "Insufficient funds on product 1: balance=1350.00, required=999999.00"
+}
+
+--- payment: product not found ---
+
+>>> curl -s -X POST http://localhost:8082/api/v1/payments/execute -H 'Content-Type: application/json' -d '{"productId":9999,"amount":100.00}'
+{
+  "error": "Product Not Found",
+  "status": 404,
+  "timestamp": "2026-10-13T16:52:39.058782493",
+  "message": "Product not found: 9999"
+}
+
+==========================================
+  TEST RUN COMPLETED: 2026-10-13 16:52:39
+  Results saved to: test.result
+==========================================

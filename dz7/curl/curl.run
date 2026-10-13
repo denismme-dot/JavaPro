@@ -1,0 +1,64 @@
+PS=http://localhost:8081
+PAY=http://localhost:8082
+OUT=test.result
+
+# Очищаем файл результата перед запуском
+> "$OUT"
+
+# Функция для логирования: пишет и в консоль, и в файл
+log() {
+    echo "$@" | tee -a "$OUT"
+}
+
+# Функция для curl + jq с записью результата
+run() {
+    echo "" | tee -a "$OUT"
+    echo ">>> $*" | tee -a "$OUT"
+    eval "$@" | jq 2>&1 | tee -a "$OUT"
+}
+
+log "=========================================="
+log "  TEST RUN: $(date '+%Y-%m-%d %H:%M:%S')"
+log "=========================================="
+
+log ""
+log "############### product-service ###############"
+log "Base URL: $PS"
+
+run "curl -s $PS/api/v1/users"
+run "curl -s $PS/api/v1/users/1"
+run "curl -s $PS/api/v1/users/by-username/tanya"
+run "curl -s '$PS/api/v1/products?userId=1'"
+run "curl -s $PS/api/v1/products/1"
+
+log ""
+log "--- withdraw 100 from product 1 ---"
+run "curl -s -X POST $PS/api/v1/products/1/withdraw -H 'Content-Type: application/json' -d '{\"amount\":100.00}'"
+
+log ""
+log "--- deposit 50 to product 1 ---"
+run "curl -s -X POST $PS/api/v1/products/1/deposit -H 'Content-Type: application/json' -d '{\"amount\":50.00}'"
+
+log ""
+log "############### payment-service ###############"
+log "Base URL: $PAY"
+
+run "curl -s $PAY/api/v1/payments/clients/1/products"
+
+log ""
+log "--- successful payment ---"
+run "curl -s -X POST $PAY/api/v1/payments/execute -H 'Content-Type: application/json' -d '{\"productId\":1,\"amount\":100.00}'"
+
+log ""
+log "--- payment: insufficient funds ---"
+run "curl -s -X POST $PAY/api/v1/payments/execute -H 'Content-Type: application/json' -d '{\"productId\":1,\"amount\":999999.00}'"
+
+log ""
+log "--- payment: product not found ---"
+run "curl -s -X POST $PAY/api/v1/payments/execute -H 'Content-Type: application/json' -d '{\"productId\":9999,\"amount\":100.00}'"
+
+log ""
+log "=========================================="
+log "  TEST RUN COMPLETED: $(date '+%Y-%m-%d %H:%M:%S')"
+log "  Results saved to: $OUT"
+log "=========================================="
